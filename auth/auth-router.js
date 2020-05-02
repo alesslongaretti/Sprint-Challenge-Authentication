@@ -18,7 +18,7 @@ router.post('/register', (req, res) => {
             res.status(201).json({ created_user: saved, token: token });
         })
         .catch(err => {
-            res.status(500).json({ message: 'problem with the db', error: err});
+            res.status(500).json({ message: 'problem with the db'});
         })
 });
 
