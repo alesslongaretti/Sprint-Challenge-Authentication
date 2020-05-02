@@ -2,6 +2,16 @@ const request = require('supertest');
 const server = require('../api/server.js');
 
 describe('POST / Register', () => {
+    // working but I have to create a new account everytime I refresh
+    // it('should return 201', async () => {
+    //     return request(server).post('/api/auth/register').send({
+    //         username: "alessandra123",
+    //         password: "password123"
+    //     })
+    //     .then(res => {
+    //         expect(res.status).toBe(201)
+    //     })
+    // })
     it('should return message - problem with db', () => {
         return request(server).post('/api/auth/register')
             .catch(res => {
@@ -17,10 +27,18 @@ describe('POST / Register', () => {
 });
 
 describe('POST / Login', () => {
-    it('', () => {
+    it('should return message - you shall not pass', () => {
+        return request(server).post('/api/auth/login').send({ username: "alessandra123", password: "password123"})
+            .then(res => {
+                expect(res.body).toEqual({message: 'You shall not pass!'})
+            })
 
     });
-    it('', () => {
+    it('should return message - problem with the db', () => {
+        return request(server).post('/api/auth/login')
+            .catch(res => {
+                expect(res.body).toEqual({ message: 'problem with the db'})
+            })
 
     });
 })
